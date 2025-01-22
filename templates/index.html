@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Caption Generator</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('../static/images/bg.jpg');
+            /* background: linear-gradient(120deg, #f6d365 0%, #fda085 100%); */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #444;
+        }
+
+        /* Container styling */
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Form elements */
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #f57c00;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ef6c00;
+        }
+
+        /* Headings and text */
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        h2 {
+            margin: 20px 0 10px;
+            color: #555;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 10px 0;
+            color: #666;
+        }
+
+        /* Image styling */
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header image styling */
+        .header-image {
+            max-width: 100%;
+            height: auto;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <h1>Image Caption Generator</h1>
+
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Upload Image</button>
+        </form>
+
+        {% if caption %}
+            <h2>Generated Caption:</h2>
+            <p>{{ caption }}</p>
+            <h2>Translated Caption(Spanish):</h2>
+            <p>{{ trans_caption }}</p>
+            <img src="{{ url_for('static', filename='uploads/' + image_file) }}" alt="Uploaded Image">
+        {% endif %}
+    </div>
+</body>
+</html>
